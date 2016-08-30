@@ -2,14 +2,23 @@ package com.niit.model;
 
 import javax.persistence.Entity;
 
-
+import com.niit.model.Supplier;
+import com.niit.model.Category;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
@@ -34,6 +43,8 @@ public class Product {
 	private String quantity;
 	@Transient
 	private MultipartFile image;
+	@Transient
+	private MultipartFile img;
 	public int getPro_Id() {
 		return pro_Id;
 	}
@@ -70,6 +81,58 @@ public class Product {
 	public void setImage(MultipartFile image) {
 		this.image = image;
 	}
+	
+	@ManyToMany(cascade=CascadeType.ALL) 
+	@JoinTable(name="sup_pro", joinColumns=@JoinColumn(name="sup_id"), inverseJoinColumns=@JoinColumn(name="sup_Id"))
+	//@JoinColumn(name="sup_Id", nullable=false ,updatable=false )
+	private Set<Supplier> supplier;
+	
+	
+	public Set<Supplier> getSupplier() {
+		return supplier;
+	}
+	public void setSupplier(Set<Supplier> supplier) {
+		this.supplier = supplier;	
+	}
+	
+	private int sup_id;
+	
+	public Set<Supplier> getSup_Id() {
+		return supplier;
+	}
+	public void setSup_Id(Set<Supplier> sup_Id) {
+		this.supplier = sup_Id;
+	}
+	
+		
+	public int getSup_id() {
+		return sup_id;
+	}
+	public void setSup_id(int sup_id) {
+		this.sup_id = sup_id;
+	}   
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="cat_Id", insertable=false ,updatable=false )
+	private Category category;
+	
+		
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;		
+		}
+	
+    private int cat_Id;
+	public int getCat_Id() {
+		return cat_Id;
+	}
+	public void setCat_Id(int cat_Id) {
+		this.cat_Id = cat_Id;
+	}
+	
+		
 	
 	
 		}
