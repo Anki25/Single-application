@@ -8,7 +8,7 @@
         <li><a href="#">My Account</a></li>
         <li><a href="#">My Orders</a></li>
         <li><a href="#">Settings</a></li>
-        <li><a href="HOME.html">Sign Out</a></li>        
+        <li><a href="home">Sign Out</a></li>        
        </ul>
        </li>
        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart">Cart</span></a></li>
@@ -75,6 +75,10 @@
 </div>
 </nav>
 
+<div align="center">
+        <h2>Welcome ${sessionScope.welcomeMsg}! You have logged in successfully.</h2>
+    </div>
+
 <div id="myCarousel" class="carousel slide">
 <ol class="carousel-indicators">
  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -119,23 +123,6 @@
   <a href="#"><img src="3.jpg" class="img-circle" width="230" height="230"></a>
 </div>
 </center>
-<center>
-<div id="footer">
-	<em>Copyright &copy; 2016, The Lights Wagon. All Rights Reserved</em>
-	<nav>
-		<a href="#">Seller's Policy</a> |
-		<a href="#">Privacy Notice</a> |
-		<a href="#">Conditions of Sale</a>
-    </nav>
-</div>
-</center>
-
-
-
-
-
-
-
 
 
 <!-- 
