@@ -35,22 +35,9 @@
         <li><a href="#">high mast</a></li>        
        </ul>
        </li>
-    </ul>
-  <ul> <!-- <center>
-<form method="get" action="#">
-<INPUT LIST="STAT" NAME="SEARCH" PLACEHOLDER="SEARCH">
-<DATALIST ID="STAT">
-<OPTION VALUE="LED">
-<OPTION VALUE="INDOOR LIGHTING">
-<OPTION VALUE="OUTDOOR LIGHTING">
-<OPTION VALUE="LAMPS">
-<OPTION VALUE="TUBELIGHTS">
-</DATALIST>
-<INPUT TYPE="BUTTON" VALUE="GO">
-</form>
-</center> -->
-<div>
-    
+  </ul>
+  <ul>
+   <li>
    <form class = "bs-example bs-example-form" role = "form">
       <div class = "row">
  <div class = "col-lg-6">
@@ -65,18 +52,17 @@
                
             </div><!-- /input-group -->
          </div><!-- /.col-lg-6 -->
-         
-      </div><!-- /.row -->
+              </div><!-- /.row -->
    </form>
    
-</div>
 
+</li>
   </ul>  
 </div>
 </nav>
 
 <div align="center">
-        <h2>Welcome ${sessionScope.welcomeMsg}! You have logged in successfully.</h2>
+        <h2>Welcome ${sessionScope.welcomeMsg}!</h2>
     </div>
 
 <div id="myCarousel" class="carousel slide">
@@ -169,7 +155,5 @@
 </script> -->
 
 
-</body>
-</html>
 
 <%@ include file="footer.jsp" %>

@@ -1,13 +1,7 @@
    <%@ include file="header.jsp" %> 
     <ul class="nav navbar-nav navbar-right">
-    <div class="btn-group">
-    <!-- <li><a href="SIGN IN.html">Sign In </a></li> -->
-    <li><a class = "btn btn-primary btn-sm" href = "SIGNIN.jsp" role = "button">Sign In</a></li>
-    </div>
-    <div class="btn-group">
-     <!--  <li><a href="SIGN UP.html">Sign Up</a></li> -->
-    <li><a class = "btn btn-primary btn-sm" href = "SIGNUP.jsp" role = "button">Sign Up</a></li>
-    </div>
+    <li><a href="signin">Sign In </a></li>
+    <li><a href="signup">Sign Up</a></li>
     </ul>   
     </div>   
     </div>
