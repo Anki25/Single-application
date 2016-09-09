@@ -8,13 +8,14 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 
-
+import javax.servlet.http.HttpSession;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +39,9 @@ import com.niit.service.UserService;
 
 @Controller
 public class AdminController {
-
+	
+	
+	
 	@Autowired
 	Product product;
 
@@ -61,55 +64,7 @@ public class AdminController {
 
 	}
 
-	@RequestMapping("/addproduct") // , method=RequestMethod.POST)
-	public ModelAndView showAddProduct(@Valid @ModelAttribute("prod") Product p1, BindingResult result,
-			HttpServletRequest request) throws IOException {
-
-		System.out.println("In add product page");
-		return new ModelAndView("addproduct");
-
-	}
-
-	@SuppressWarnings("unchecked")
-	@RequestMapping("/registerP")
-	public String createProduct(@ModelAttribute("prod") Product p2, @RequestParam("image") MultipartFile file,
-			Model model, HttpServletRequest request) throws IOException {
-		// String filename;
-		// byte[]bytes;
-		prodservice.saveOrUpdate(p2);
-		System.out.println("image");
-		MultipartFile image = p2.getImage();
-		Path path;
-		path = Paths.get("F://Single//Single//src//main//webapp//resources//images//" + p2.getPro_Id() + ".jpg");
-		// String path =
-		// request.getSession().getServletContext().getRealPath("/resources/images/"
-		// + user.getUser_id() + ".jpg");
-		System.out.println("Path = " + path);
-		System.out.println("File name = " + p2.getImage().getOriginalFilename());
-		if (image != null && !image.isEmpty()) {
-			try {
-				image.transferTo(new File(path.toString()));
-				System.out.println("Image Saved in:" + path.toString());
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("Image not saved");
-			}
-		}
-
-		Supplier supplier = supplierservice.getName(((Supplier) product.getSupplier()).getSup_name());
-		supplierservice.saveOrUpdate(supplier);
-
-		Category category = categoryservice.getName(product.getCategory().getCat_name());
-		categoryservice.saveOrUpdate(category);
-
-		product.setCategory(category);
-		product.setSupplier((Set<Supplier>) supplier);
-
-		prodservice.saveOrUpdate(product);
-
-		return "adminhome";
-	}
-
+	
 	@RequestMapping("/addcategory")
 	public ModelAndView showAddCategory(@Valid @ModelAttribute("cat") Category c1, BindingResult result,
 			HttpServletRequest request) throws IOException {
@@ -149,48 +104,7 @@ public class AdminController {
 	}
 
 	
-	@RequestMapping(value="/category/add",method=RequestMethod.POST)
-	public String addCategory(@ModelAttribute("category")Category category){
-		
-		ModelAndView mv = new ModelAndView("category");
-		if(categoryservice.get(category.getCat_Id())==null)
-		{
-			categoryservice.saveOrUpdate(category);
-		}
-		else
-		{
-			mv.addObject("errorMessage","The record exist with this id" + category.getCat_Id());
-		}
-	
-	return "category";
-}
-	
-	@RequestMapping("category/remove/{id}")
-	public ModelAndView deleteCategory(@PathVariable("id")int id)throws Exception{
-		
-		Category category=categoryservice.get(id);
-		ModelAndView mv = new ModelAndView("category");
-		if(category==null)
-		{
-			mv.addObject("errorMessage", "Could not delete");
-		}
-		else
-		{
-			categoryservice.delete(category);
-		}
-		
-		/*boolean flag=categoryDAO.delete(id);
-		ModelAndView mv=new ModelAndView("category");
-		String msg="Success";
-		if(flag!=true)
-		{
-			msg="Unsuccessful";
-		}
-		mv.addObject("msg",msg);
-		}
-		log.debug("Ending");*/
-		return mv;
-	}
+
 	
 	@RequestMapping("/managecategory")
 	public ModelAndView categories(){
@@ -203,37 +117,7 @@ public class AdminController {
 		
 	}
 	
-	@RequestMapping("category/edit/{id}")
-	public String editCategory(@PathVariable("id")int id,Model model){  //model because we want to retrieve whole object to edit anything we want
 		
-	//public String addCategory(@ModelAttribute("category")Category category)   another method
-		//if(categoryDAO.get(Category.get(Id)!=null)
-		//ModelAndView mv=new ModelAndView();
-		//mv.addObject()
-		
-		if(categoryservice.get(id)!=null)
-		{
-			Category category = new Category();
-			categoryservice.saveOrUpdate(category);
-			model.addAttribute("message","Succesfully updated");
-		}
-		else
-		{
-			model.addAttribute("errorMessage","Could not be updated");
-		}
-		
-		return "category";
-	}
-	
-	@RequestMapping(value="/category" ,method=RequestMethod.GET)
-	public String listCategories(@Valid @ModelAttribute("category") Category c3, BindingResult result,
-			HttpServletRequest request,Model model) throws IOException {        
-		
-	model.addAttribute("Category", new Category());
-	model.addAttribute("categoryList","this.categoryDAO.list()");
-	
-	return "category";
-	}
 	
 	
 	
